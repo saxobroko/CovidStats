@@ -1,11 +1,14 @@
 {
-  "name": "coviddetail",
-  "version": "1.0.0",
+  "name": "covidstats",
+  "version": "1.1.0",
   "description": "",
   "main": "app.js",
   "keywords": [],
-  "author": "puf17640",
-  "license": "ISC",
+  "author": "Saxo_Broko",
+  "license": "MIT",
+  "scripts": {
+    "start": "node app.js"
+   },
   "dependencies": {
     "cookie-parser": "1.4.5",
     "covidapi": "0.3.0",
