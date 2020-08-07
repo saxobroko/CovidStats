@@ -6,7 +6,6 @@ const express = require('express'),
 
 if(dotenvconf.error || !process.env.NODE_ENV || !process.env.HTTP_PORT || !process.env.SESSION_SECRET){
   console.error('invalid environment variables, please fix your .env file')
-  process.exit(-1)
 }
 
 const isProduction = process.env.NODE_ENV === 'production'
