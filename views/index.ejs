@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <!-- Primary Meta Tags -->
+  <title>Saxo_Broko - COVID19 Stats</title>
+  <meta name="title" content="COVID19 Daily Digest">
+  <meta name="description" content="A Dashboard showing a detailed overview over what is going on in your country, of course for free. #STAYHOME">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://rona.saxobroko.com/">
+  <meta property="og:title" content="COVID19 Details">
+  <meta property="og:description" content="A Dashboard showing a detailed overview over what is going on in your country, of course for free. #STAYHOME">
+  <meta property="og:image" content="https://rona.saxobroko.com/img/metatags.png">
+
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://rona.saxobroko.com/">
+  <meta property="twitter:title" content="COVID19 Details">
+  <meta property="twitter:description" content="A Dashboard showing a detailed overview over what is going on in your country, of course for free. #STAYHOME">
+  <meta property="twitter:image" content="https://rona.saxobroko.com/img/metatags.png">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" type="image/png" href="img/favicon.ico">
+  <script src="https://momentjs.com/downloads/moment.js" type="application/javascript"></script>
+  <script src="/vendor/Chart.bundle.min.js" type="application/javascript"></script>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-160824550-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-160824550-2');
+  </script>
+  <style>
+    .bmc-button img{
+      height: 20px !important;
+      width: 20px !important;
+      margin-bottom: 1px !important;
+      box-shadow: none !important;
+      border: none !important;
+      vertical-align: middle !important;
+    }
+    .bmc-button{
+      padding: 7px 10px 7px 10px !important;
+      line-height: 35px !important;
+      height:35px !important;
+      text-decoration: none !important;
+      display:inline-flex !important;
+      color:#000000 !important;
+      background-color:#FFFFFF !important;
+      border-radius: 5px !important;
+      border: 1px solid transparent !important;
+      padding: 7px 10px 7px 10px !important;
+      font-size: 28px !important;
+      letter-spacing:0.6px !important;
+      box-shadow: 0px 1px 2px rgba(190, 190, 190, 0.5) !important;
+      -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+      margin: 0 auto !important;
+      font-family:'Cookie', cursive !important;
+      -webkit-box-sizing: border-box !important;
+      box-sizing: border-box !important;
+      -o-transition: 0.3s all linear !important;
+      -webkit-transition: 0.3s all linear !important;
+      -moz-transition: 0.3s all linear !important;
+      -ms-transition: 0.3s all linear !important;
+      transition: 0.3s all linear !important;
+    }
+    .bmc-button:hover, .bmc-button:active, .bmc-button:focus {
+      -webkit-box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+      text-decoration: none !important;
+      box-shadow: 0px 1px 2px 2px rgba(190, 190, 190, 0.5) !important;
+      opacity: 0.85 !important;
+      color:#000000 !important;
+    }
+  </style>
+</head>
+<body>
+  <div class="main px-3 py-4 h-100 maw-90-p m-auto footer-spacing">
+    <div class="row">
+      <div class="col-12 col-md-6 mb-4 order-1">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row h-100">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/map-pin.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="mb-2 heading">Country</h5>
+            <!--<input class="w-200 rounded" id="countrySelect" list="countryList" name="country">
+            <datalist id="countryList">
+              <option>Global</option>
+              <% for (var country of countries) { %>
+                <option><%= country.country %></option>
+              <% } %>
+            </datalist>-->
+            <select class="w-200 rounded" id="countrySelect" name="country">
+              <option>Global</option>
+              <% for (var country of countries) { %>
+                <option><%= country.country %></option>
+              <% } %>
+            </select>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 order-2 order-md-3">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/doctors-bag.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="heading">Total Cases</h5>
+            <h3 class="number"><%= String(data.cases).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small><%= data.todayCases !== undefined ? "("+(data.todayCases >= 0 ? "+":"-")+String(Math.abs(data.todayCases)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 order-3 order-md-4">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/cemetery.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="heading">Total Deaths</h5>
+            <h3 class="number"><%= String(data.deaths).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small><%= data.todayDeaths !== undefined ? "("+(data.todayDeaths >= 0 ? "+":"-")+String(Math.abs(data.todayDeaths)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>  
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 order-4 order-md-5">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/coronavirus.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="heading">Total Active</h5>
+            <h3 class="number"><%= String(data.active).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small><%= data.todayActive !== undefined ? "("+(data.todayActive >= 0 ? "+":"-")+String(Math.abs(data.todayActive)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 order-4 order-md-5">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/recovery.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="text-center heading">Total Recovered</h5>
+            <h3 class="text-center number"><%= String(data.recovered).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small class="recovered"><%= data.todayRecovered !== undefined ? "("+(data.todayRecovered >= 0 ? "+":"-")+String(Math.abs(data.todayRecovered)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 order-4 order-md-5">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/hospital-bed.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="text-center heading">Critical Cases</h5>
+            <h3 class="text-center number"><%= String(data.critical).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small><%= data.todayCritical !== undefined ? "("+(data.todayCritical >= 0 ? "+":"-")+String(Math.abs(data.todayCritical)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 order-5 order-md-6">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/group.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="text-center heading">Cases Per Million</h5>
+            <h3 class="text-center number"><%= String(data.casesPerOneMillion).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small><%= data.todayCasesPerOneMillion !== undefined ? "("+(data.todayCasesPerOneMillion >= 0 ? "+":"-")+String(Math.abs(data.todayCasesPerOneMillion)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 mb-md-0 order-6 order-md-7">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/skull.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="text-center heading">Deaths Per Million</h5>
+            <h3 class="text-center number"><%= String(data.deathsPerOneMillion).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small><%= data.todayDeathsPerOneMillion !== undefined ? "("+(data.todayDeathsPerOneMillion >= 0 ? "+":"-")+String(Math.abs(data.todayDeathsPerOneMillion)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-4 mb-md-0 order-7 order-md-8">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/test-passed.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="text-center heading">Tests</h5>
+            <h3 class="text-center number"><%= String(data.tests).replace(/(.)(?=(\d{3})+$)/g,'$1,') %> <span><small class="recovered"><%= data.todayTests !== undefined ? "("+(data.todayTests >= 0 ? "+":"-")+String(Math.abs(data.todayTests)).replace(/(.)(?=(\d{3})+$)/g,'$1,')+")" : "" %></small></span></h3>
+          </div>
+        </div>
+      </div>
+      <div class="col-12 col-md-6 mb-md-4 order-8 order-md-2">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow h-100 d-flex flex-row">
+          <span class="icon d-inline-block align-self-center">
+            <img width="56" height="56" src="https://img.icons8.com/color/96/000000/historical.png"/>
+          </span>
+          <div class="d-inline-block text-center w-100">
+            <h5 class="heading">Last Updated</h5>
+            <h3 class="number" id="lastUpdated"></h3>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="row mt-4">
+      <div class="col-12">
+        <div class="p-3 mx-3 mx-md-2 mx-lg-0 rounded shadow h-100 d-flex flex-row">
+          <canvas id="chartCanvas"></canvas>
+        </div>
+      </div>
+    </div>
+  </div>
+    <div>
+	 <a class="rounded shadow p-2" style="position: fixed; top: 2%; left: 2%;font-weight: 40px; font-size: 200%;color: #000;text-decoration: none;" target="_blank" href="https://saxobroko.com/">
+	  <span>
+	   <b>Back</b>
+	   <img style="margin-top: -2px;" width="20" height="20" src="https://img.icons8.com/flat_round/64/000000/back--v1.png"/>
+	  </span>
+	 </a>
+	</div>
+  </div>
+  <script>
+    var ctx = document.getElementById('chartCanvas').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Active', 'Recovered', 'Deaths'],
+            datasets: [{
+                data: [<%= data.active %>, <%= data.recovered %>, <%= data.deaths %>],
+                backgroundColor: [
+                  'rgba(255, 206, 86, 1)',
+                  'rgba(75, 192, 192, 1)',
+                  'rgba(255, 99, 132, 1)',
+                ],
+                hoverBackgroundColor: [
+                  'rgba(255, 206, 86, .75)',
+                  'rgba(75, 192, 192, .75)',
+                  'rgba(255, 99, 132, .75)',
+                ],
+                borderWidth: 2
+            }]
+        },
+        options: {
+          legend : {
+            position: 'left'
+          }
+        }
+    });
+  </script>
+  <script>
+    let updated = parseInt('<%- data.updated %>')
+    if(updated)
+      $("#lastUpdated").text(moment(updated).fromNow(true))
+    let current = decodeURIComponent(window.location.pathname.replace(/\//g, ''))
+    $("#countrySelect").val(current.charAt(0).toUpperCase()+current.slice(1))
+                 .on('change', (e) => $('#countrySelect option').filter((i, o)=> o.value.toLowerCase() === e.target.value.toLowerCase()).length && window.location.replace('/'+encodeURIComponent($(e.target).val())))
+                 .on('input', (e) => $('#countrySelect option').filter((i, o)=> o.value.toLowerCase() === e.target.value.toLowerCase()).length && window.location.replace('/'+encodeURIComponent($(e.target).val())))
+    $("small").each((i, e) => {
+      if(parseInt(e.textContent.replace(/(\(|\))/g, '')) > 0){
+        $(e).addClass('positive')
+      }else{
+        $(e).addClass('negative')
+      }
+    })
+  </script>
+</body>
+</html>
