@@ -44,4 +44,6 @@ app.use((err, req, res, next) => {
   res.status(err.status || 5e2).send({ error: err.message })
 })
 
-app.listen(process.env.HTTP_PORT, () => console.log(`listening on port ${process.env.HTTP_PORT}`))
+var port = process.env.PORT || 8080;
+
+app.listen(port, () => console.log(`listening on port ${port}`))
