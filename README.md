@@ -1,5 +1,5 @@
 # CovidStats
-Coronavirus Stats
+Coronavirus Stats 
 
 # Build
 - npm i
